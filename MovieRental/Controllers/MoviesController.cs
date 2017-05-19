@@ -14,8 +14,17 @@ namespace MovieRental.Controllers
         public ActionResult Random()
         {
             var movie = new Movie {Name = "Shrek!"};
-            return View(movie);
             
+            ViewData["RandomMovieD"] = movie;
+
+            ViewBag.RandomMovieB = movie;
+
+            ViewData["RandomMoviesD"] = "Shrak (string from ViewData)";
+
+            ViewBag.RandomMoviesB = "Shrak (string from ViewBag)";
+
+            return View(movie);
+
         }
 
         public ActionResult Edit(int id)
