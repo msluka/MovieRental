@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using MovieRental.Models;
+using MovieRental.ViewModels;
 
 namespace MovieRental.Controllers
 {
@@ -14,16 +15,29 @@ namespace MovieRental.Controllers
         public ActionResult Random()
         {
             var movie = new Movie {Name = "Shrek!"};
-            
-            ViewData["RandomMovieD"] = movie;
 
-            ViewBag.RandomMovieB = movie;
+            var customers = new List<Customer>()
+            {
+                new Customer { Name = "Johne"},
+                new Customer { Name = "Anna"}
 
-            ViewData["RandomMoviesD"] = "Shrak (string from ViewData)";
+            };
 
-            ViewBag.RandomMoviesB = "Shrak (string from ViewBag)";
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
 
-            return View(movie);
+            return View(viewModel);
+
+            //ViewData["RandomMovieD"] = movie;
+
+            //ViewBag.RandomMovieB = movie;
+
+            //ViewData["RandomMoviesD"] = "Shrak (string from ViewData)";
+
+            //ViewBag.RandomMoviesB = "Shrak (string from ViewBag)";
 
         }
 
