@@ -26,7 +26,7 @@ namespace MovieRental.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            var customers = _context.Customers.Include(c =>c.MembershipType).ToList();
+            var customers = _context.Customers.Include(c => c.MembershipType).ToList();
 
             return View(customers);
         }
@@ -34,9 +34,9 @@ namespace MovieRental.Controllers
         public ActionResult Details(int id)
         {
             var customer = _context.Customers.Include(c => c.MembershipType).SingleOrDefault(c => c.Id == id);
-            
+
             if (customer == null) return HttpNotFound();
-            
+
             return View(customer);
         }
 
@@ -50,13 +50,41 @@ namespace MovieRental.Controllers
             return View(viewModel);
         }
         [HttpPost]
-        public ActionResult Create(Customer customer)
+        public ActionResult Save(Customer customer)
         {
-            _context.Customers.Add(customer);
+            if (customer.Id == 0)
+                _context.Customers.Add(customer);
+
+            else
+            {
+                var customerInDb = _context.Customers.Single(c => c.Id == customer.Id);
+
+                customerInDb.Name = customer.Name;
+                customerInDb.Birthdate = customer.Birthdate;
+                customerInDb.MembershipTypeId = customer.MembershipTypeId;
+                customerInDb.IsSubscribedToNewsLetter = customer.IsSubscribedToNewsLetter;
+
+            }
+
             _context.SaveChanges();
 
             return RedirectToAction("Index", "Customers");
         }
+
+        public ActionResult Edit(int id)
+        {
+            var customer = _context.Customers.SingleOrDefault(c => c.Id == id);
+            if (customer == null)
+
+                return HttpNotFound();
+            var viewModel = new CustomerFormViewModel
+            {
+                Customer = customer,
+                MemebershipTypes = _context.MembershipTypes.ToList()
+            };
+            return View("CustomerForm", viewModel);
+        }
+
 
         //private IEnumerable<Customer> GetCustomers()
         //{
@@ -66,6 +94,7 @@ namespace MovieRental.Controllers
         //       new Customer { Id = 2, Name = "Mary Williams" }
         //    };
         //}
+
 
     }
 }
