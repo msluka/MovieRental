@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MovieRental.Models;
+using MovieRental.ViewModels;
 
 namespace MovieRental.Controllers
 {
@@ -41,7 +42,12 @@ namespace MovieRental.Controllers
 
         public ActionResult New()
         {
-            return View();
+            var membershipTypes = _context.MembershipTypes.ToList();
+            var viewModel = new NewCustomerViewModel
+            {
+                MemebershipTypes = membershipTypes
+            };
+            return View(viewModel);
         }
 
         //private IEnumerable<Customer> GetCustomers()
