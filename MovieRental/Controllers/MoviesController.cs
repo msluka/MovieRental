@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -12,23 +13,49 @@ namespace MovieRental.Controllers
 {
     public class MoviesController : Controller
     {
-        // GET: Movies
+        private ApplicationDbContext _context;
 
+        public MoviesController()
+        {
+            _context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
+        }
+
+        // GET: Movies
         public ActionResult Index()
         {
-            var movies = GetMovies();
+            var movies = _context.Movies.Include(m => m.Genre).ToList();
             return View(movies);
         }
 
-        private IEnumerable<Movie> GetMovies()
+        public ActionResult Details(int id)
         {
-            return new List<Movie>
-            {
-                new Movie {Id = 1, Name = "Shrek"},
-                new Movie {Id = 2, Name = "Wall-e"}
-            };
+            var movie = _context.Movies.Include(c => c.Genre).SingleOrDefault(c => c.Id == id);
 
+            if (movie == null) return HttpNotFound();
+
+            return View(movie);
         }
+
+        //public ActionResult Index()
+        //{
+        //    var movies = GetMovies();
+        //    return View(movies);
+        //}
+
+        //private IEnumerable<Movie> GetMovies()
+        //{
+        //    return new List<Movie>
+        //    {
+        //        new Movie {Id = 1, Name = "Shrek"},
+        //        new Movie {Id = 2, Name = "Wall-e"}
+        //    };
+
+        //}
 
 
 
@@ -51,13 +78,13 @@ namespace MovieRental.Controllers
 
         //    return View(viewModel);
 
-            //ViewData["RandomMovieD"] = movie;
+        //ViewData["RandomMovieD"] = movie;
 
-            //ViewBag.RandomMovieB = movie;
+        //ViewBag.RandomMovieB = movie;
 
-            //ViewData["RandomMoviesD"] = "Shrak (string from ViewData)";
+        //ViewData["RandomMoviesD"] = "Shrak (string from ViewData)";
 
-            //ViewBag.RandomMoviesB = "Shrak (string from ViewBag)";
+        //ViewBag.RandomMoviesB = "Shrak (string from ViewBag)";
 
         //}
 
