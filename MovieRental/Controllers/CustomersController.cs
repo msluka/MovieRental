@@ -45,6 +45,8 @@ namespace MovieRental.Controllers
             var membershipTypes = _context.MembershipTypes.ToList();
             var viewModel = new NewCustomerViewModel
             {
+                Customer = new Customer(), // was instantiated  for solving the problem with id
+                                           // in hidden input in the View - "New"
                 MemebershipTypes = membershipTypes
             };
             return View(viewModel);
