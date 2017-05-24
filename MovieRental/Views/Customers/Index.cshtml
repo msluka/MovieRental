@@ -51,8 +51,11 @@ else
 @section scripts
 {
     <script>
-        $(document).ready(function() {
-            $("#customer").on("click", ".js-delete",
+        $(document).ready(function () {
+
+            $("#customers").DataTable();
+
+            $("#customers").on("click", ".js-delete",
                 function() {
                     var button = $(this);
 
