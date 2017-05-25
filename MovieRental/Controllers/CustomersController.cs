@@ -26,7 +26,14 @@ namespace MovieRental.Controllers
         // GET: Customers
         public ActionResult Index()
         {
-            return View();
+            if (User.IsInRole("Admin"))
+            {
+                return View();
+            }
+            else
+            {
+                return View("IndexReadOnly");
+            }
         }
 
         public ActionResult Details(int id)
@@ -37,6 +44,9 @@ namespace MovieRental.Controllers
 
             return View(customer);
         }
+
+        /*[Authorize(Roles ="Admin")] */  //or create a static class with const string and use this class:
+        [Authorize(Roles = RoleName.Admin)] 
 
         public ActionResult New()
         {
