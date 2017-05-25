@@ -21,5 +21,7 @@ namespace MovieRental.Dtos
 
         public bool IsSubscribedToNewsLetter { get; set; }
         public byte MembershipTypeId { get; set; } //Foreign Key
+
+        public MembershipTypeDto MembershipType { get; set; }
     }
 }

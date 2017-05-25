@@ -13,7 +13,8 @@ namespace MovieRental.App_Start
         public MappingProfile()
         {
             Mapper.CreateMap<Customer, CustomerDto>();
-            
+            Mapper.CreateMap<MembershipType, MembershipTypeDto>();
+
             Mapper.CreateMap<CustomerDto, Customer>()
                 .ForMember(c => c.Id, opt => opt.Ignore()); // to avoid exception during PUT
             
