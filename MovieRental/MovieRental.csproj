@@ -260,6 +260,10 @@
     <Compile Include="Migrations\201705221104185_AddMovieAndGenreTables.Designer.cs">
       <DependentUpon>201705221104185_AddMovieAndGenreTables.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201705252314324_AddDrivingLicenseToApplicationUser.cs" />
+    <Compile Include="Migrations\201705252314324_AddDrivingLicenseToApplicationUser.Designer.cs">
+      <DependentUpon>201705252314324_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -558,6 +562,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201705221104185_AddMovieAndGenreTables.resx">
       <DependentUpon>201705221104185_AddMovieAndGenreTables.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201705252314324_AddDrivingLicenseToApplicationUser.resx">
+      <DependentUpon>201705252314324_AddDrivingLicenseToApplicationUser.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
