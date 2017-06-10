@@ -58,11 +58,11 @@ namespace MovieRental
                appId: "1351563631601717",
                appSecret: "****");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "975745964879-7qjqkbo0i521lv8ckgg3a9sqit2nn59f.apps.googleusercontent.com",
+                ClientSecret = "5iIn1r6dDVDNf0LxbmDDjEDE"
+            });
         }
     }
 }
